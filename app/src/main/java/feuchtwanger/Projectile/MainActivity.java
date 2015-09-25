@@ -17,14 +17,12 @@ public class MainActivity extends AppCompatActivity {
     TextView angle;
     TextView velocity;
     TextView time;
+    TextView answer2;
     Button calculate;
     TextView answer;
     EditText angleTB;
     EditText velocityTB;
     EditText timeTB;
-    Button angleButton;
-    Button velocityButton;
-    Button timeButton;
     double angleA;
     double velocityA;
     double timeA;
@@ -41,16 +39,21 @@ public class MainActivity extends AppCompatActivity {
         time = (TextView) findViewById(R.id.time);
         timeTB = (EditText) findViewById(R.id.timeTB);
         answer = (TextView) findViewById(R.id.answer);
+        answer2 = (TextView) findViewById(R.id.answer2);
 
         calculate = (Button) findViewById(R.id.calculate);
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View c) {
-                angleA.setText(angleTB.getText().toString());
+                angleA = Double.parseDouble(angleTB.getText().toString());
+                velocityA = Double.parseDouble(velocityTB.getText().toString());
+                timeA = Double.parseDouble(timeTB.getText().toString());
+                Projectile p = new Projectile(angleA, velocityA, timeA);
                 double radians = Math.toRadians(angleA);
-                final Double answerA = ((Math.sin(radians)) * velocityA * timeA);
-                answer.setText(Double.toString(answerA));
+                answer.setText(Double.toString(p.getX()));
                 answer = (TextView) findViewById(R.id.answer);
+                answer2.setText(Double.toString(p.getY()));
+                answer = (TextView) findViewById(R.id.answer2);
             }
         });
     }
