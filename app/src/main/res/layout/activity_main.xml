@@ -45,16 +45,9 @@
         android:layout_height="wrap_content"
         android:text="Answer"
         android:id="@+id/answer"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/angleButton"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/velocityButton"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/timeButton"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Answer 2"
+        android:id="@+id/answer2"/>
 </LinearLayout>

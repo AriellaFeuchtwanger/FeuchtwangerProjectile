@@ -35,38 +35,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         angle = (TextView) findViewById(R.id.angle);
-        angleButton = (Button) findViewById(R.id.angleButton);
-        angleButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View a){
-                angleTB = (EditText) findViewById(R.id.angleTB);
-                Editable angleB = angleTB.getText();
-                angleA = Double.parseDouble(angleB.toString());
-            }
-        });
+        angleTB = (EditText) findViewById(R.id.angleTB);
         velocity = (TextView) findViewById(R.id.velocity);
-        velocityButton = (Button) findViewById(R.id.velocityButton);
-
-        velocityButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                velocityA = Double.parseDouble(velocity.getText().toString());
-            }
-        });
+        velocityTB = (EditText) findViewById(R.id.velocityTB);
         time = (TextView) findViewById(R.id.time);
-        timeButton = (Button) findViewById(R.id.timeButton);
-        timeButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View t){
-                timeA = Double.parseDouble(time.getText().toString());
-            }
-        });
+        timeTB = (EditText) findViewById(R.id.timeTB);
         answer = (TextView) findViewById(R.id.answer);
 
         calculate = (Button) findViewById(R.id.calculate);
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View c) {
+                angleA.setText(angleTB.getText().toString());
                 double radians = Math.toRadians(angleA);
                 final Double answerA = ((Math.sin(radians)) * velocityA * timeA);
                 answer.setText(Double.toString(answerA));
@@ -74,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
