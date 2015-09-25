@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        
         angle = (TextView) findViewById(R.id.angle);
         angleTB = (EditText) findViewById(R.id.angleTB);
         velocity = (TextView) findViewById(R.id.velocity);
@@ -49,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
                 velocityA = Double.parseDouble(velocityTB.getText().toString());
                 timeA = Double.parseDouble(timeTB.getText().toString());
                 Projectile p = new Projectile(angleA, velocityA, timeA);
-                double radians = Math.toRadians(angleA);
                 answer.setText(Double.toString(p.getX()));
                 answer = (TextView) findViewById(R.id.answer);
                 answer2.setText(Double.toString(p.getY()));
