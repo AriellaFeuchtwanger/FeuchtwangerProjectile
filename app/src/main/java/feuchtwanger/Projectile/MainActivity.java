@@ -1,5 +1,6 @@
 package feuchtwanger.Projectile;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -26,20 +27,15 @@ public class MainActivity extends AppCompatActivity {
     EditText angleTB;
     EditText velocityTB;
     EditText timeTB;
-    double angleA;
-    double velocityA;
-    double timeA;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-<<<<<<< HEAD
 
-=======
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
         Picasso.with(this).load("http://usercontent2.hubimg.com/8968837_f260.jpg").into(imageView);
->>>>>>> d6df772b8549dd88b52ee349141fb6482030a7b7
+
         angle = (TextView) findViewById(R.id.angle);
         angleTB = (EditText) findViewById(R.id.angleTB);
         velocity = (TextView) findViewById(R.id.velocity);
@@ -50,19 +46,27 @@ public class MainActivity extends AppCompatActivity {
         answer2 = (TextView) findViewById(R.id.answer2);
 
         calculate = (Button) findViewById(R.id.calculate);
+
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View c) {
-                angleA = Double.parseDouble(angleTB.getText().toString());
-                velocityA = Double.parseDouble(velocityTB.getText().toString());
-                timeA = Double.parseDouble(timeTB.getText().toString());
-                Projectile p = new Projectile(angleA, velocityA, timeA);
-                answer.setText(Double.toString(p.getX()));
-                answer = (TextView) findViewById(R.id.answer);
-                answer2.setText(Double.toString(p.getY()));
-                answer = (TextView) findViewById(R.id.answer2);
+                MainActivity.this.showAnswer();
             }
         });
+    }
+
+    private void showAnswer() {
+        Intent intent = new Intent(this, AnswerActivity.class);
+
+        double angleA = Double.parseDouble(angleTB.getText().toString());
+        double velocityA = Double.parseDouble(velocityTB.getText().toString());
+        double timeA = Double.parseDouble(timeTB.getText().toString());
+
+        intent.putExtra("Angle", angleA);
+        intent.putExtra("Velocity", velocityA);
+        intent.putExtra("Time", timeA);
+
+        startActivity(intent);
     }
 
 
@@ -86,13 +90,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void showAnswer(){
-
-        double radians = Math.toRadians(angleA);
-        final Double answerA = (Math.sin(radians)) * velocityA * timeA;
-        answer.setText(answerA.toString());
-        answer = (TextView) findViewById(R.id.answer);
     }
 }
