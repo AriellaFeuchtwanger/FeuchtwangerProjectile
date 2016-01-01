@@ -1,6 +1,7 @@
 package feuchtwanger.Projectile;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     EditText velocityTB;
     EditText timeTB;
 
+    private SharedPreferences preferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
         Picasso.with(this).load("http://usercontent2.hubimg.com/8968837_f260.jpg").into(imageView);
+
+        preferences = this.getSharedPreferences("DEFAULT", MODE_PRIVATE); //Creates preferences
+        //to save and retrieve data. To edit you need an editor
 
         angle = (TextView) findViewById(R.id.angle);
         angleTB = (EditText) findViewById(R.id.angleTB);
@@ -53,6 +59,28 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.showAnswer();
             }
         });
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("ANGLE", angleTB.getText().toString());
+        editor.putString("VELOCITY", velocityTB.getText().toString());
+        editor.putString("TIME", timeTB.getText().toString());
+        editor.apply(); //This is what saves it
+
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        angleTB.setText(preferences.getString("ANGLE", "")); //if there's nothing there, it will
+        //display the hint
+        velocityTB.setText(preferences.getString("VELOCITY", ""));
+        timeTB.setText(preferences.getString("TIME", ""));
     }
 
     private void showAnswer() {
